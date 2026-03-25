@@ -7,18 +7,22 @@ interface BoardProps {
   board: BoardCell[][];
   className?: string;
   previewTiles?: { tile: TileType, row: number, col: number }[];
-  highlightCells?: { row: number, col: number }[]; // New prop for highlighting specific cells (e.g., Master Move)
+  highlightCells?: { row: number, col: number }[];
   isProjector?: boolean;
   onPreviewTileTouchStart?: (e: React.TouchEvent | React.MouseEvent, tile: TileType, row: number, col: number) => void;
+  onCellClick?: (row: number, col: number) => void;
+  selectedCell?: { row: number, col: number } | null;
 }
 
-const Board: React.FC<BoardProps> = ({ 
-  board, 
-  className = '', 
-  previewTiles = [], 
-  highlightCells = [], 
+const Board: React.FC<BoardProps> = ({
+  board,
+  className = '',
+  previewTiles = [],
+  highlightCells = [],
   isProjector = false,
-  onPreviewTileTouchStart
+  onPreviewTileTouchStart,
+  onCellClick,
+  selectedCell,
 }) => {
   
   const getCellColor = (m: MultiplierType) => {
@@ -60,7 +64,7 @@ const Board: React.FC<BoardProps> = ({
           case MultiplierType.DoubleWord:
           case MultiplierType.DoubleLetter:
               return 'text-mauve-800';
-          case MultiplierType.Normal:
+          case MultiplierType.None:
               return 'text-cream-200';
           default:
               return 'text-white';     
@@ -103,19 +107,25 @@ const Board: React.FC<BoardProps> = ({
         
         const multiplierText = getCellText(cell.multiplier);
         const textColorClass = getTextColor(cell.multiplier);
-        const isMultiplier = cell.multiplier !== MultiplierType.Normal;
+        const isMultiplier = cell.multiplier !== MultiplierType.None;
         
         // Responsive text size for tiles (smaller on mobile)
         const tileTextSizeClass = isProjector 
             ? '' 
             : '!text-[10px] sm:!text-xs md:!text-base';
 
+        const isSelectedCell = selectedCell?.row === rIndex && selectedCell?.col === cell.col;
+        const isClickable = onCellClick && !cell.tile && !preview;
+
         gridItems.push(
             <div
                 key={`cell-${cell.row}-${cell.col}`}
+                onClick={isClickable ? () => onCellClick!(rIndex, cell.col) : undefined}
                 className={`
                   relative flex items-center justify-center w-full h-full border border-mauve-200
                   ${getCellColor(cell.multiplier)}
+                  ${isSelectedCell ? 'ring-2 ring-inset ring-teal-500' : ''}
+                  ${isClickable ? 'cursor-pointer hover:brightness-90' : ''}
                 `}
             >
                 {!cell.tile && !preview && multiplierText && (

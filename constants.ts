@@ -76,3 +76,29 @@ export const TILE_COUNTS: Record<string, number> = {
     'Z': 1,
     '?': 2  // Escarrassos
 };
+
+// Valors de les lletres (punts)
+export const LETTER_VALUES: Record<string, number> = {
+  'A': 1, 'E': 1, 'I': 1, 'L': 1, 'N': 1, 'O': 1, 'R': 1, 'S': 1, 'T': 1, 'U': 1,
+  'C': 2, 'D': 2,
+  'B': 3, 'M': 3, 'P': 3,
+  'F': 4, 'G': 4, 'V': 4,
+  'Û': 5,  // QU
+  'H': 8, 'J': 8, 'X': 8, 'Ý': 8,  // NY
+  'Ç': 10, 'Ł': 10, 'Z': 10,  // L·L
+  '?': 0,  // Escarràs (blank)
+};
+
+// Mapa de dígraf → char intern
+export const DIGRAPH_MAP: Record<string, string> = {
+  'QU': 'Û',
+  'L·L': 'Ł',
+  'NY': 'Ý',
+};
+
+// Mapa invers: char intern → display
+export const REVERSE_DIGRAPH_MAP: Record<string, string> = {
+  'Û': 'QU',
+  'Ł': 'L·L',
+  'Ý': 'NY',
+};

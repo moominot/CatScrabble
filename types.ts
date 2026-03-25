@@ -142,3 +142,24 @@ export interface ScoreResult {
   words: string[];
   error?: string;
 }
+
+// ─── PlayerMove (ús intern scrabbleUtils) ──────────────────────────────────────
+
+export interface PlayerMove {
+  id?: string;
+  playerId?: string;
+  playerName?: string;
+  tableNumber?: string;
+  row: number;
+  col: number;
+  direction: 'H' | 'V';
+  tiles: Tile[];
+  word?: string;
+  score?: number;
+  timestamp?: number;
+  [key: string]: unknown;
+}
+
+// ─── Re-exports des de constants (per compatibilitat amb scrabbleUtils) ────────
+
+export { LETTER_VALUES, DIGRAPH_MAP, REVERSE_DIGRAPH_MAP } from './constants';

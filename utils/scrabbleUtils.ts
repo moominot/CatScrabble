@@ -7,15 +7,13 @@ import {
   DOUBLE_LETTER_COORDS,
   TILE_COUNTS
 } from '../constants';
-import { 
-  BoardCell, 
-  MultiplierType, 
-  Tile, 
-  DIGRAPH_MAP, 
-  REVERSE_DIGRAPH_MAP, 
-  LETTER_VALUES,
-  PlayerMove 
+import {
+  BoardCell,
+  MultiplierType,
+  Tile,
+  PlayerMove
 } from '../types';
+import { DIGRAPH_MAP, REVERSE_DIGRAPH_MAP, LETTER_VALUES } from '../constants';
 import { debugLog, debugWarn, debugGroup, debugGroupEnd } from './debug';
 
 // --- SUCCINCT TRIE IMPLEMENTATION (Ported from Steve Hanov's JS) ---
@@ -343,7 +341,7 @@ export const createInitialBoard = (): BoardCell[][] => {
     const row: BoardCell[] = [];
     for (let c = 0; c < BOARD_SIZE; c++) {
       const key = `${r},${c}`;
-      let multiplier = MultiplierType.Normal;
+      let multiplier = MultiplierType.None;
       
       if (r === 7 && c === 7) multiplier = MultiplierType.Center;
       else if (TRIPLE_WORD_COORDS.includes(key)) multiplier = MultiplierType.TripleWord;
@@ -867,4 +865,13 @@ export const calculateRemainingBag = (board: BoardCell[][], currentRack: string[
     }
 
     return bag;
+};
+
+export const shuffleArray = <T>(arr: T[]): T[] => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 };
