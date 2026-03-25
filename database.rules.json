@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "games": {
+      "$gameId": {
+        ".read": true,
+        "racks": {
+          "$playerId": {
+            ".read": "auth != null && auth.uid === $playerId",
+            ".write": "auth != null && auth.uid === $playerId"
+          }
+        },
+        ".write": true
+      }
+    },
+    "publicGames": {
+      "$gameId": {
+        ".read": true,
+        ".write": true
+      }
+    }
+  }
+}
