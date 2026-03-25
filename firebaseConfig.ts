@@ -5,13 +5,13 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 
 const firebaseConfig = {
-  apiKey: "CANVIA_AQUI",
-  authDomain: "CANVIA_AQUI.firebaseapp.com",
-  databaseURL: "https://CANVIA_AQUI-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "CANVIA_AQUI",
-  storageBucket: "CANVIA_AQUI.appspot.com",
-  messagingSenderId: "CANVIA_AQUI",
-  appId: "CANVIA_AQUI"
+  apiKey: "AIzaSyD_c0OuSIEn_N637Pk7pYtlBrYyNIS7uDk",
+  authDomain: "catscrabble-a6318.firebaseapp.com",
+  databaseURL: "https://catscrabble-a6318-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "catscrabble-a6318",
+  storageBucket: "catscrabble-a6318.firebasestorage.app",
+  messagingSenderId: "328501424619",
+  appId: "1:328501424619:web:1951b1c0542a87979829ae"
 };
 
 if (!firebase.apps.length) {
